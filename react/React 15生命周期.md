@@ -80,7 +80,7 @@ React 组件会根据 shouldComponentUpdate 的返回值，来决定是否执行
 
 #### Unmounting 阶段：组件的卸载
 组件的销毁阶段本身是比较简单的，只涉及一个生命周期
-![avatar](../assets/react-15-lifecycle3.png)
+![avatar](../assets/react-15-lifecycle4.png)
 
 这个生命周期本身不难理解，我们重点说说怎么触发它。组件销毁的常见原因有以下两个:
 * 组件在父组件中被移除了：这种情况相对比较直观，对应的就是我们上图描述的这个过程；
