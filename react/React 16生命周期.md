@@ -78,7 +78,7 @@ React 16.4 的挂载和卸载流程都是与 React 16.3 保持一致的，差异
     // ...
   }
 ```
-这个方法和 getDerivedStateFromProps 颇有几分神似，它们都强调了“我需要一个返回值”这回事。区别在于 __getSnapshotBeforeUpdate 的返回值会作为第三个参数给到 componentDidUpdate。它的执行时机是在 render 方法之后，真实 DOM 更新之前__。在这个阶段里，我们可以__同时获取到更新前的真实 DOM 和更新前后的 state&props 信息。__
+这个方法和 getDerivedStateFromProps 颇有几分神似，它们都强调了“我需要一个返回值”这回事。区别在于 __getSnapshotBeforeUpdate 的返回值会作为第三个参数给到 componentDidUpdate。它的执行时机是在 render 方法之后，真实 DOM 更新之前__。在这个阶段里，我们可以 __同时获取到更新前的真实 DOM 和更新前后的 state&props 信息。__
 getSnapshotBeforeUpdate例子：实现一个内容会发生变化的滚动列表，要求根据滚动列表的内容是否发生变化，来决定是否要记录滚动条的当前位置。
 这个需求的前半截要求我们对比更新前后的数据（感知变化），后半截则需要获取真实的 DOM 信息（获取位置），这时用 getSnapshotBeforeUpdate 来解决就再合适不过了。
 对于这个生命周期，需要重点把握的是它与 componentDidUpdate 间的通信过程。在 Demo 中我给出了一个使用示例，它将帮助你更加具体地认知这个过程。代码如下：
@@ -130,4 +130,5 @@ Fiber 架构的重要特征就是可以被打断的异步渲染模式。但这�
 * componentWillReceiveProps。
 
 这些生命周期的共性，__就是它们都处于 render 阶段，都可能重复被执行__，而且由于这些 API 常年被滥用，它们在重复执行的过程中都存在着不可小觑的风险。
+
 总的来说，__React 16 改造生命周期的主要动机是为了配合 Fiber 架构带来的异步渲染机制__ 在这个改造的过程中，React 团队精益求精，针对生命周期中长期被滥用的部分推行了具有强制性的最佳实践。这一系列的工作做下来，首先是确保了 Fiber 机制下数据和视图的安全性，同时也确保了生命周期方法的行为更加纯粹、可控、可预测。
