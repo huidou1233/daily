@@ -182,7 +182,7 @@ beginWork 源码太长不看版的重点总结：
 
 这里你先不必急于关注 updateHostRoot 的逻辑细节。事实上，在整段 switch 逻辑里，包含的形如“update+类型名”这样的函数是非常多的。在专栏示例的 Demo 中，就涉及了对 updateHostRoot、updateHostComponent 等的调用，十来种 updateXXX，我们不可能一个一个去扣每一个函数的逻辑。
 
-幸运的是，这些函数之间不仅命名形式一致，工作内容也相似。就 render 链路来说，它们共同的特性，就是都会 __
+幸运的是，这些函数之间不仅命名形式一致，工作内容也相似。就 render 链路来说，它们共同的特性，就是都会 __通过调用 reconcileChildren 方法，生成当前节点的子节点。__
 
 reconcileChildren 的源码如下：
 ```JavaScript
@@ -370,7 +370,9 @@ if (next === null) {
 如此便能够确保每次 performUnitOfWork 执行完毕后，当前的 __workInProgress 都存储着下一个需要被处理的节点，从而为下一次的 workLoopSync 循环做好准备。__
 
 现在我在 workLoopSync 内部打个断点，尝试输出每一次获取到的 workInProgress 的值，workInProgress 值的变化过程如下图所示：
+
 ![avater](../assets/reactdom-render2-16.png)
+
 共有 7 个节点，若你点击展开查看每个节点的内容，就会发现这 7 个节点其实分别是：
 * rootFiber（当前 Fiber 树的根节点）
 * App FiberNode（App 函数组件对应的节点）
