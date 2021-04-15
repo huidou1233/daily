@@ -18,7 +18,8 @@ BOM 为浏览器对象模型，接下来一一来回顾。
 - window.close() - 关闭当前窗口
 - window.moveTo() - 移动当前窗口
 - window.resizeTo() - 调整当前窗口的尺寸
-  全局变量不能通过 delete 操作符删除；而 window 属性上定义的变量可以通过 delete 删除
+
+全局变量不能通过 delete 操作符删除；而 window 属性上定义的变量可以通过 delete 删除
 
 ```JavaScript
 var num=123;
@@ -38,12 +39,12 @@ var newValue=window.oldValue; // 不会报错
 console.log(newValue); // undefined
 ```
 
-##screen
+## screen
 
 - screen.availWidth - 可用的屏幕宽度
 - screen.availHeight - 可用的屏幕高度
 
-##location
+## location
 
 window.location 对象用于获得当前页面的地址 (URL)，并把浏览器重定向到新的页面。
 
