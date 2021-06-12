@@ -34,6 +34,7 @@ Fiber 架构的应用目的，按照 React 官方的说法，是实现“__增�
 ### Fiber 架构核心：“可中断”“可恢复”与“优先级”
 
 在 React 16 之前，React 的渲染和更新阶段依赖的是如下图所示的两层架构：
+
 ![avater](../assets/fiber2.png)
 
 正如上文所分析的那样，Reconciler 这一层负责对比出新老虚拟 DOM 之间的变化，Renderer 这一层负责将变化的部分应用到视图上，从 Reconciler 到 Renderer 这个过程是严格同步的。
