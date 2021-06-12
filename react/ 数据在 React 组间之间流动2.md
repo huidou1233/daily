@@ -4,6 +4,7 @@
  #### 图解 Context API 工作流
  Context API 有 3 个关键的要素：React.createContext、Provider、Consumer
  我们通过调用 React.createContext，可以创建出一组 Provider。Provider 作为数据的提供方，可以将数据下发给自身组件树中任意层级的 Consumer，这三者之间的关系用一张图来表示：
+
  ![avatar](../assets/data-flow1.png)
 
 注意：Cosumer 不仅能够读取到 Provider 下发的数据，还能读取到这些数据后续的更新。这意味着数据在生产者和消费者之间能够及时同步，这对 Context 这种模式来说至关重要。
@@ -75,7 +76,9 @@ MessageList.childContextTypes = {
 };
 ```
 上述代码对应的组织结构梳理到一张图里，如下图所示：
+
 ![avatar](../assets/data-flow2.png)
+
 借着这张图，我们来理解旧的 Context API 的工作过程：
 * 首先，通过给 MessageList 设置 childContextTypes 和 getChildContext，可以使其承担起 context 的生产者的角色；
 * 然后，MessageList 的组件树内部所有层级的组件都可以通过定义 contextTypes 来成为数据的消费者，进而通过 this.context 访问到 MessageList 提供的数据。
@@ -108,7 +111,9 @@ const action = {
 ```
 * reducer 是一个函数，它负责**对变化进行分发和处理，**最终将新的数据返回给 store。
 store、action 和 reducer 三者紧密配合，便形成了 Redux 独树一帜的工作流：
+
 ![avatar](../assets/data-flow4.png)
+
 从上图中，我们首先读出的是数据的流向规律：__在 Redux 的整个工作过程中，数据流是严格单向的__。
 接下来仍然是围绕上图，我们来一起看看 Redux 是如何帮助 React 管理数据流的。对于一个 React 应用来说，视图（View）层面的所有数据（state）都来自 store（再一次诠释了单一数据源的原则）。
 如果你想对数据进行修改，只有一种途径：派发 action。action 会被 reducer 读取，进而根据 action 内容的不同对数据进行修改、生成新的 state（状态），这个新的 state 会更新到 store 对象里，进而驱动视图层面做出对应的改变。
@@ -171,4 +176,5 @@ const action = {
 store.dispatch(action)
 ```
 对应的流程图：
+
 ![avatar](../assets/data-flow5.png)
