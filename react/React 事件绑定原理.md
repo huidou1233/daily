@@ -1,6 +1,7 @@
 # React 事件绑定原理
 
 1. 事件注册
+   
    ![avatar](../assets/react-event1.png)
 
    - 组件装载 / 更新。
@@ -12,6 +13,7 @@
    - 给 document 注册原生事件回调为 dispatchEvent（统一的事件分发机制）。
 
 2. 事件存储
+   
    ![avatar](../assets/react-event2.png)
 
    - EventPluginHub 负责管理 React 合成事件的 callback，它将 callback 存储在 listenerBank 中，另外还存储了负责合成事件的 Plugin。
@@ -21,6 +23,7 @@
    - listenerBank 的结构是：listenerBank[registrationName][key]。
 
 3. 事件触发执行
+4. 
    ![avatar](../assets/react-event3.png)
 
    - 触发 document 注册原生事件的回调 dispatchEvent
@@ -45,7 +48,8 @@
      - 如果阻止了冒泡，停止遍历，否则通过 executeDispatch 执行合成事件。
      - 释放处理完成的事件。
 
-4. 合成事件
+5. 合成事件
+   
    ![avatar](../assets/react-event4.png)
 
    - 调用 EventPluginHub 的 extractEvents 方法。
@@ -55,6 +59,7 @@
    - 根据元素 nodeid(唯一标识 key)和事件类型从 listenerBink 中取出回调函数
    - 返回带有合成事件参数的回调函数
 
-5. 总流程
+6. 总流程
+   
   ![avatar](../assets/react-event5.png)
   
